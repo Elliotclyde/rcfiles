@@ -34,15 +34,16 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 
 "fzf
 "
-" also need to install fzf and ripgrep. 
-" In brew: 
-" brew install fzf
-" brew install ripgrep
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 "git stuff
 Plug 'airblade/vim-gitgutter'
+
+"tab autocompletion
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
@@ -170,10 +171,6 @@ set undofile
 "         end
 :let g:ruby_indent_assignment_style = 'variable'
 
-
-
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Hugh Stuff
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -183,7 +180,6 @@ set relativenumber             " Show relative line numbers
 set clipboard=unnamed
 :set wrap!                     " I'm tired of line wraps yo!
 
-" From Primagen hehe: 
 :nnoremap <C-d> <C-d>zz
 :nnoremap <C-u> <C-u>zz
 
@@ -192,6 +188,34 @@ nnoremap <C-f> <cmd>:RG<cr>
 nnoremap <silent> <leader>. :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
 nnoremap <silent> <leader>o :vsplit<CR><C-w>l:Files<CR>
+
+noremap <silent> <C-S>          :w!<CR>
+inoremap <silent> <C-S>         <C-O>:w!<CR>
+
+nnoremap <silent> <leader>m :let @*=expand('%')<cr>
+
+function! RubocopFormat() abort
+  silent !rubocop -A %
+  edit!
+  redraw!
+endfunction
+
+augroup RubocopAutoFormat
+  autocmd!
+  autocmd BufWritePost *.rb call RubocopFormat()
+augroup END
+
+
+function! PrettierFormat() abort
+  silent !npx prettier --write %
+  edit!
+  redraw!
+endfunction
+
+augroup PrettierAutoFormat
+  autocmd!
+  autocmd BufWritePost *.js,*.jsx,*.ts,*.tsx call PrettierFormat()
+augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Rip grep in a directory: 
@@ -224,4 +248,17 @@ function! RgDirPrompt()
 endfunction
 
 nnoremap <silent> <leader>f <cmd>:call RgDirPrompt()<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Enter completion config 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Enter accepts
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use Tab and Shift+Tab to cycle through buffers seamlessly
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
 

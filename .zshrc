@@ -8,8 +8,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export FONT_AWESOME_AUTH_TOKEN=F635DF24-59B2-4332-8252-7A27588D3C40
-
 alias be="bundle exec"
 
 # Watch the server logs when they're not writing to stdout
@@ -26,3 +24,10 @@ alias vimo="vim \$(fzf)"
 # Cool re-watch of commit
 #
 alias wutyoudo="gitlogue --commit \$(git rev-parse HEAD) --speed 10 --theme dracula"
+
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

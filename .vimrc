@@ -34,6 +34,10 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 
 "fzf
 "
+" also need to install fzf and ripgrep.
+" In brew:
+" brew install fzf
+" brew install ripgrep
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
@@ -180,6 +184,7 @@ set relativenumber             " Show relative line numbers
 set clipboard=unnamed
 :set wrap!                     " I'm tired of line wraps yo!
 
+" From Primagen hehe:
 :nnoremap <C-d> <C-d>zz
 :nnoremap <C-u> <C-u>zz
 
@@ -218,7 +223,7 @@ augroup PrettierAutoFormat
 augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Rip grep in a directory: 
+" Rip grep in a directory:
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -241,16 +246,16 @@ command! -nargs=+ RGDir
 function! RgDirPrompt()
 
     let l:dir_path = input("Search Dir (e.g. src/utils): ")
-    
+
     let l:command = 'RGDir ' .  l:dir_path
-    
+
     execute l:command
 endfunction
 
 nnoremap <silent> <leader>f <cmd>:call RgDirPrompt()<CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Enter completion config 
+" Enter completion config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Enter accepts
@@ -261,4 +266,3 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
-

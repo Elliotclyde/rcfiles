@@ -4,10 +4,6 @@ eval "$(rbenv init -)"
 eval `ssh-agent`
 ssh-add ~/.ssh/github
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 alias be="bundle exec"
 
 # Watch the server logs when they're not writing to stdout
@@ -25,13 +21,15 @@ alias vimo="vim \$(fzf)"
 #
 alias wutyoudo="gitlogue --commit \$(git rev-parse HEAD) --speed 10 --theme dracula"
 
-export PATH="/opt/homebrew/bin:$PATH"
-export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
-export PATH="/Users/hughhaworth/.nvm/versions/node:$PATH"
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+export PATH="/Users/hughhaworth/.nvm/versions/node:$PATH"
+export PATH="$NVM_DIR/versions/node/$(nvm current)/bin:$PATH"
+export PATH="$HOME/bin:$PATH"
 
 bindkey '^[[1;5C' emacs-forward-word
 bindkey '^[[1;5D' emacs-backward-word

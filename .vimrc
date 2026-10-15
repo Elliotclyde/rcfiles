@@ -43,11 +43,16 @@ Plug 'junegunn/fzf.vim'
 
 "git stuff
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 
 "tab autocompletion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-Plug 'tpope/vim-fugitive'
+"snippets
+Plug 'SirVer/ultisnips'
+
+"rails vim - allows you to jump to the test file of the current file with :A
+Plug 'tpope/vim-rails'
 
 call plug#end()
 
